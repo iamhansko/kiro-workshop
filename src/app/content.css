@@ -1,0 +1,4 @@
+div:has([data-rmiz-content="found"]) img {
+  max-width: 960px;
+  width: 100%;
+}

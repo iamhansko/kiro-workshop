@@ -1,0 +1,29 @@
+.navbar {
+  min-width: 100%;
+  max-height: 56px;
+  padding-left: 32px;
+  background-color: #161D26;
+  color: #ffffff;
+}
+
+.sidebarTitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.footer {
+  padding: 8px;
+  color: #ebebf0;
+  font-size: 12px;
+  font-weight: 400;
+  background-color: #232f3e;
+  min-width: 100%;
+  justify-content: end;
+}
+
+.footer a {
+  margin: 0px 16px;
+  text-decoration: underline;
+}
