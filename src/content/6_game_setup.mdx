@@ -1,0 +1,83 @@
+# Spirit of Kiro 게임 실행
+
+> [!NOTE]
+>
+> 본 작업은 Windows 환경을 기준으로 진행됩니다.
+
+### 필수 소프트웨어 설치
+- [git CLI](https://git-scm.com/install/windows)
+- [aws CLI](https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/getting-started-install.html)
+- [Docker Desktop](https://www.docker.com/get-started/)
+
+### Docker 컨테이너로 게임 시작하기
+
+1. Docker Desktop을 실행합니다. 좌측 하단 Engine running을 확인하고 다음 단계로 넘어갑니다.
+
+![1](/img/game_setup/1.png)
+
+2. Git Bash 등의 터미널 환경에서 다음 명령어를 수행하고, spirit-of-kiro 프로젝트를 저장합니다. 이후 kiro 명령어를 통해 프로젝트를 엽니다.
+
+```sh copy
+git clone https://github.com/iamhansko/spirit-of-kiro.git
+cd spirit-of-kiro
+git checkout challenge
+kiro ./
+```
+> [!NOTE]
+>
+> Do you trust the authors of the files in this folder? 경고 창이 나타나면 "Yes, I trust the authors"를 선택합니다.
+
+3. Kiro에서 ***Ctrl + `*** 키를 입력하여 하단 터미널 창을 엽니다. 우측 상단 아래 화살표(v) 아이콘을 선택하고, Git Bash를 선택하여 새로운 터미널 창을 엽니다.
+
+    **(⚠️ 작은 따옴표(')가 아닌 백틱(`) 사용)**
+
+![2](/img/game_setup/2.png)
+![3](/img/game_setup/3.png)
+
+4. Workshop Studio로 돌아가 좌측 사이드바 "Get AWS CLI Credentials"를 선택합니다. 이후 Linux or macOS (bash) 탭에서 명령어 4줄을 복사하고 Kiro 터미널에 입력합니다. 
+
+![4](/img/game_setup/4.png)
+![5](/img/game_setup/5.png)
+![6](/img/game_setup/6.png)
+
+5. 다음 명령어를 수행하여 spirit-of-kiro 게임을 실행합니다.
+
+```sh copy
+./scripts/init.sh
+```
+
+6. Server와 ItemImages의 OK 상태를 확인하고, 브라우저에서 http://localhost:5173 을 접속하여 게임을 플레이합니다. 
+
+**(🎮 게임 진행 순서 : 회원가입 -> 로그인 -> 아이템 수집 -> 아이템 조합 -> 아이템 판매)**
+
+```sh
+==============================
+Server : OK
+ItemImages : OK
+Client : http://localhost:5173
+==============================
+```
+
+### 게임 플레이 가이드
+
+![7](/img/game_setup/7.png)
+
+환경 설정을 완료하고 게임 서버/클라이언트를 잘 실행했다면, 이제 Spirit of Kiro 게임을 플레이 해보세요. 이 가이드는 게임의 기본 조작법과 메커니즘을 설명합니다.
+
+##### 목표
+- **실험 정신** : 다양한 조합을 실험해보세요. 무한한 가능성이 있습니다.
+- **정리 정돈** : 작업대가 너무 어수선해지지 않도록 정리하세요.
+- **보관 활용** : 보관 상자를 활용하여 아이템을 정리하세요.
+- **품질 중시** : 독특하고 상태가 좋은 아이템일수록 더 높은 가격을 받을 수 있습니다.
+
+##### 기본 조작
+- **이동**: `W`, `A`, `S`, `D` 키
+- **아이템 상호작용**: `E` 키
+- **아이템 던지기**: `T` 키
+
+##### 작업
+- **아이템 생성** : `E` 키로 빨간 레버를 당겨(PULL) 무작위 아이템을 생성할 수 있습니다.
+- **아이템 수집** : `E` 키를 사용하여 아이템을 집고 운반할 수 있습니다.
+- **아이템 조합** : 작업대에 아이템을 놓고 다른 아이템과 조합하여 새로운 아이템을 만들 수 있습니다.
+- **아이템 판매** : 바닥 문으로 아이템을 던져 (`T` 키), 상점 주인에게 판매할 수 있습니다.
+- **아이템 구매** : 컴퓨터에서 다른 플레이어가 만든 아이템을 구매할 수 있습니다.
