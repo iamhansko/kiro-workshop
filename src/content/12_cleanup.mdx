@@ -1,0 +1,22 @@
+# 정리
+
+### 개발 환경 및 AWS 리소스 정리
+
+1. Kiro에서 ***Ctrl + `*** 키를 입력하여 하단 터미널 창을 엽니다. 우측 상단 아래 화살표(v) 아이콘을 선택하고, Git Bash를 선택하여 새로운 터미널 창을 엽니다.
+
+    **(⚠️ 작은 따옴표(')가 아닌 백틱(`) 사용)**
+
+![2](/img/game_setup/2.png)
+![3](/img/game_setup/3.png)
+
+2. Workshop Studio로 돌아가 좌측 사이드바 "Get AWS CLI Credentials"를 선택합니다. 이후 Linux or macOS (bash) 탭에서 명령어 4줄을 복사하고 Kiro 터미널에 입력합니다. 
+
+![4](/img/game_setup/4.png)
+![5](/img/game_setup/5.png)
+![6](/img/game_setup/6.png)
+
+3. 다음 명령어를 수행하여 spirit-of-kiro 게임을 종료하고, AWS 리소스를 일괄 삭제합니다.
+
+```sh copy
+./scripts/cleanup.sh
+```
