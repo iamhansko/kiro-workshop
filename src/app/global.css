@@ -185,6 +185,42 @@ div.nextra-border a:nth-child(1) {
   margin-left: auto;
 }
 
+div.nextra-bleed {
+  margin-left: auto;
+}
+
 .x\:w-64 {
   width: calc(var(--x-spacing)* 72);
+}
+
+img.w100 {
+  width: 100px !important;
+}
+
+img.w200 {
+  width: 200px !important;
+}
+
+img.w300 {
+  width: 300px !important;
+}
+
+img.w400 {
+  width: 400px !important;
+}
+
+img.w500 {
+  width: 500px !important;
+}
+
+img.w600 {
+  width: 600px !important;
+}
+
+img.w700 {
+  width: 700px !important;
+}
+
+img.w800 {
+  width: 800px !important;
 }
