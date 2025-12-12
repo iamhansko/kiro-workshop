@@ -1,0 +1,109 @@
+# Agent Hook
+
+### 학습 목표
+- 에이전트 훅의 개념과 활용 이해
+- 실용적인 자동화 훅 생성
+- 개발 워크플로우 최적화 체험
+
+### 에이전트 훅
+
+**에이전트 훅**은 프로젝트 내 반복작업(보일러플레이트)을 자동화하는 기능입니다. 반복작업(보일러플레이트)의 정확도와 생산성을 높일 수 있습니다.
+
+### Spirit of Kiro 게임 에셋(이미지) 정리 훅 만들기
+
+현재 게임의 한계
+
+```md
+client/src/systems/preloader-system.ts 파일은 게임 시작 전 모든 에셋(이미지)를 미리 불러오는 Preloader 시스템입니다.
+
+Preloader 특징 :
+- 인증 화면에서 에셋(이미지) 프리로딩 시작
+- 서버 이벤트를 통한 새로운 에셋(이미지) 로딩 감지
+- 컴포넌트와 분리된 깔끔한 설계
+- /client/src/assets/index.ts의 에셋(이미지) 목록에 의존
+
+문제점 : 
+ 새 컴포넌트와 에셋을 추가하면 /client/src/assets/index.ts에서 에셋(이미지) 목록을 수동으로 업데이트해야 합니다.
+
+해결방안 : 
+ 에이전트 훅을 통해 /client/src/assets/index.ts에서의 에셋(이미지) 목록 업데이트를 자동화합니다.
+```
+
+1. Kiro 좌측 사이드바에서 유령 아이콘(👻)을 선택합니다.
+
+2. AGENT HOOKS에서 추가(+) 아이콘을 선택하고 `Describe a hook using natural language`에 다음 내용을 입력하고 `Enter`를 입력합니다. 새로운 에이전트 훅이 생성됩니다.
+
+```md copy
+assets 폴더에 파일이 생성되면,
+assets 폴더의 index.ts 파일이 적절하게 업데이트되도록 하세요.
+```
+
+![1](/img/agent_hook/1.png)
+![2](/img/agent_hook/2.png)
+
+3. 에이전트 훅이 생성되면 Event를 `File Created`로 변경합니다. (이미 Event가 `File Created`라면 넘어갑니다.)
+
+4. 다음과 같은 구조로 훅 파일이 생성될 것입니다. 이 훅 파일(*.kiro.hook)은 .kiro/hooks/ 경로에 저장됩니다.
+
+```json
+{
+  "enabled": true,
+  "name": "Assets Index Updater",
+  "description": "Automatically updates the assets/index.ts file whenever new files are created in the assets folder to maintain proper exports",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "client/src/assets/**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A new file has been created in the assets folder. Please update the client/src/assets/index.ts file to properly export the new asset. Make sure to follow the existing pattern in the index.ts file and add appropriate import/export statements for the new file. Consider the file type (image, CSS, etc.) and export it with an appropriate name that follows the project's naming conventions."
+  }
+}
+```
+
+### Spirit of Kiro 게임 에셋(이미지) 제거 훅 만들기
+
+1. 위와 마찬가지로 이번에는 다음 프롬프트로 새로운 에이전트 훅을 생성합니다. 생성된 에이전트 훅의 Event를 `File Deleted`로 바꿔주세요.
+
+```md copy
+assets 폴더에 파일이 삭제되면, assets 폴더의 index.ts 파일에서 해당 파일 레퍼런스를 삭제해주세요.
+```
+
+![3](/img/agent_hook/3.png)
+
+2. Kiro가 생성하는 훅 파일의 구조는 다음과 같습니다. 이 훅 파일(*.kiro.hook)은 .kiro/hooks/ 경로에 저장됩니다.
+
+```json
+{
+  "enabled": true,
+  "name": "Assets Delete Sync",
+  "description": "Automatically updates the assets/index.ts file when files are deleted from the assets folder to maintain proper exports",
+  "version": "1",
+  "when": {
+    "type": "fileDeleted",
+    "patterns": [
+      "client/src/assets/**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A file has been deleted from the client/src/assets folder. Please examine the current client/src/assets/index.ts file and update it to remove any exports that reference the deleted file(s). Make sure all remaining exports are valid and the file maintains proper TypeScript syntax. Only remove exports for files that no longer exist in the assets folder."
+  }
+}
+```
+
+### 에이전트 훅 테스트하기
+
+이제 두 개의 에이전트 훅이 .kiro/hooks에 설정되었고, 좌측 사이드바 AGENT HOOKS 아래에도 표시되어야 합니다.
+
+1. client/src/assets/ 경로에 [이미지 파일](https://cataas.com/cat)을 드래그 앤 드롭해보세요. 에셋 정리 훅이 작동하여 `/client/src/assets/index.ts`를 업데이트하는 것을 확인할 수 있습니다.
+
+2. 그 다음 해당 이미지를 삭제하면, 에셋 제거 훅이 작동하여 `/client/src/assets/index.ts`에서 삭제된 에셋(이미지) 관련 코드를 삭제합니다.
+
+> [!NOTE]
+>
+> 에이전트 훅의 메시지를 보려면, 채팅 패널 상단의 Task list 버튼을 클릭한 후 활성화된 Current Task를 선택하세요. 또는 History 버튼을 눌러 이미 완료된 에이전트 훅의 메시지를 확인할 수도 있습니다.
+

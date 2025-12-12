@@ -1,10 +1,9 @@
 # Spec 세션
 
 ### 학습 목표
-- Vibe 세션과 Spec 세션의 차이점 체험
-- 두 접근법의 장단점 이해
+- Vibe 세션과 Spec 세션의 차이점과 장단점 이해
 - 상황에 맞는 세션 유형 선택 능력 습득
-- 실제 앱 개발을 통한 실습
+- 실제 애플리케이션 개발을 통한 세션 실습 진행
 
 ### Vibe 세션 vs Spec 세션
 
@@ -72,6 +71,37 @@
 3. 세션 창 Command에서 실행이 멈출 경우, 실행(▶) 아이콘을 계속 선택
 
 4. Kiro가 자동으로 기본 파일(product / structure / tech) 생성
+
+5. 좌측 사이드바 > Kiro 패널(유령(👻) 아이콘) 다시 선택
+
+6. AGENT STEERING에서 `+` 아이콘 선택
+
+![5](/img/spec_session/5.png)
+
+7. 워크스페이스에 대한 스티어링을 추가하기 위해 "spirit-of-kiro agent stering" 선택
+
+![6](/img/spec_session/6.png)
+
+8. 마크다운 파일명 `"korean.md"` > `Enter` 입력
+
+![7](/img/spec_session/7.png)
+
+9. 생성된 `korean.md`에 다음 내용을 입력합니다.
+
+```md copy
+---
+inclusion: fileMatch
+fileMatchPattern: ".kiro/specs/*.md"
+---
+
+All descriptions in the "design.md", "requirements.md", and "tasks.md" markdown documents within the ".kiro/specs/" directory should be written in Korean, except for code, file names, and directory names.
+```
+
+![8](/img/spec_session/8.png)
+
+> [!NOTE]
+>
+> Spec 마크다운 문서는 기본적으로 `.kiro/specs/` 경로에 위치하며, 영어로 작성됩니다. 하지만 `fileMatch` inclusion과 `".kiro/specs/*.md"` fileMatchPattern 설정이 적용된 `korean.md` 스티어링이 추가되면 `.kiro/specs/` 경로에 위치한 Spec 마크다운 문서(*.md)는 영어가 아닌 한국어로 작성됩니다.
 
 ### Spec 세션으로 Spirit of Kiro 개선하기
 
