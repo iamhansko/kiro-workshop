@@ -90,18 +90,18 @@
 
 ```md copy
 ---
-inclusion: fileMatch
-fileMatchPattern: ".kiro/specs/*.md"
+inclusion: always
 ---
 
-All descriptions in the "design.md", "requirements.md", and "tasks.md" markdown documents within the ".kiro/specs/" directory should be written in Korean, except for code, file names, and directory names.
+- Kiro must respond in Korean.
+- All documents within the ".kiro/" directory should be written in Korean, except for code, file names, and directory names.
 ```
 
 ![8](/img/spec_session/8.png)
 
 > [!NOTE]
 >
-> Spec 마크다운 문서는 기본적으로 `.kiro/specs/` 경로에 위치하며, 영어로 작성됩니다. 하지만 `fileMatch` inclusion과 `".kiro/specs/*.md"` fileMatchPattern 설정이 적용된 `korean.md` 스티어링이 추가되면 `.kiro/specs/` 경로에 위치한 Spec 마크다운 문서(*.md)는 영어가 아닌 한국어로 작성됩니다.
+> Spec 마크다운 문서는 기본적으로 `.kiro/specs/` 경로에 위치하며, 영어로 작성됩니다. 하지만 `korean.md` 스티어링이 추가되면 `.kiro/specs/` 경로에 위치한 Spec 마크다운 문서(*.md)는 영어가 아닌 한국어로 작성됩니다.
 
 ### Spec 세션으로 Spirit of Kiro 개선하기
 
