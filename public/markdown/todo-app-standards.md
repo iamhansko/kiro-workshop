@@ -13,7 +13,7 @@ inclusion: always
 - 들여쓰기: 2칸 스페이스
 
 ### CSS
-- BEM 방법론 사용 (Block__Element--Modifier)
+- BEM 방법론 사용 (Block-Element-Modifier)
 - CSS 변수 활용 (--primary-color 등)
 - 모바일 퍼스트 반응형 디자인
 - 들여쓰기: 2칸 스페이스

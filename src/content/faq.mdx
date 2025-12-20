@@ -1,3 +1,135 @@
 # FAQ
 
-추가 예정
+##### Q1. Kiro Workshop 문서만으로는 실습 과정을 이해하기 어렵습니다.
+
+A1. 모든 실습 과정을 녹화한 [YouTube 영상 (무음성 / 무자막)](https://youtu.be/-IjYrIwRn54)을 통해 Windows11 환경에서의 작업을 더 자세히 확인할 수 있습니다.
+
+---
+
+##### Q2. 로컬 환경에서 Kiro를 설치할 수 없습니다.
+
+A2. Kiro가 설치된 Windows 서버를 생성하고 원격 연결하기 위해 [CloudFormation 스택 생성 링크](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?stackName=windows&templateURL=https://ws-assets-prod-iad-r-iad-ed304a55c2ca1aee.s3.us-east-1.amazonaws.com/1e69eb7c-e95e-4ab5-9ce9-a69e533e1e9f/rdp.yaml)를 클릭합니다.
+모든 설정의 기본값을 유지하고 [기능 및 변형] 항목을 모두 체크한 후 [스택 생성]을 선택합니다. windows 스택 상태가 **CREATE_COMPLETE**로 전환될 때까지 대기합니다.
+
+이후 windows 스택에서 출력 탭으로 이동합니다. [원격 데스크톱 연결(RDP)](C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories) 프로그램을 실행하고, 옵션 표시를 엽니다. 
+[컴퓨터]에 스택 출력 `01RdpUrl` 값을 입력하고, [사용자 이름]에 스택 출력 `02Username` 값을 입력합니다. 이후 [연결]을 선택합니다.
+
+![1](/img/faq/rdp1.png)
+
+[비밀 번호]는 스택 출력 `03Password` 값을 입력합니다. 
+
+![2](/img/faq/rdp2.png)
+![3](/img/faq/rdp3.png)
+
+Windows 서버 원격 접속에 성공했다면, 바탕화면에 Kiro와 `01 GameServer`, `02 GameClient` 아이콘이 표시될 때까지 대기합니다. 
+모든 아이콘이 표시되었다면 `01 GameServer`와 `02 GameClient`를 차례대로 클릭합니다. 
+이후 인터넷 브라우저에서 `http://localhost:5173`에 접속하여 Spirit of Kiro 게임이 실행되었는지 확인합니다.
+
+![4](/img/faq/rdp4.png)
+
+---
+
+##### Q3. Kiro를 설치했으나 로그인이 실패합니다. 
+
+A3. Workshop Studio에 접속해서 좌측 사이드바 "Get AWS CLI Credentials"를 선택합니다. 이후 Linux or macOS (bash) 탭에서 명령어 4줄을 복사하고 Git Bash 등의 터미널 환경에 입력합니다. 
+
+![4](/img/game_setup/4.png)
+![5](/img/game_setup/5.png)
+
+이후 다음 명령을 수행하여 Kiro 프로필 생성 및 사용자 구독이 정상적으로 이루어졌는지 확인합니다.
+
+```sh
+# Windows (amd64)
+curl -L -O https://github.com/iamhansko/kiroctl/releases/download/v0.0/kiroctl.exe
+./kiroctl check
+
+# macOS (arm64)
+curl -L -o kiroctl https://github.com/iamhansko/kiroctl/releases/download/v0.0/kiroctl-macos
+chmod +x ./kiroctl
+./kiroctl check
+
+```
+
+출력 결과는 아래 예시와 같습니다.
+
+```sh
+# Output
+🌎 Region : us-east-1
+✅ IAM Identity Center Instance : arn:aws:sso:::instance/ssoins-01234567890abced
+✅ Kiro Profile : KiroProfile-us-east-1
+✅ 1 User(s)
+✅ 1 Subscription(s)
+
+( 4/4 Passed )
+```
+
+만약 **4/4 Passed**가 출력되지 않았다면 다음 명령을 수행합니다. 
+신규 사용자에 적용할 **이메일(Email), 사용자 이름(Given Name) / 성(Family Name) 정보**를 입력합니다.
+```sh
+./kiroctl init
+```
+
+출력되는 **로그인 URL(Sign in URL) / 사용자 이름(Username) / 임시 비밀번호(Password) 정보**로 Kiro 로그인을 재시도합니다.
+
+```sh
+# Output
+=== Kiro Environment Initialization Complete ===
+
+[ Environment Information ]
+Sign in URL : https://d-1234567890.awsapps.com/start
+Region      : us-east-1
+Username    : kiro@example.com
+Password    : 5vy$MyA6fLneWttWy#%NW5V@vLflVh1PmQ
+
+```
+
+---
+
+##### Q4. Spirit of Kiro 게임에서 아이템은 생성되지만 아이템 이미지가 깨집니다.
+
+A4. 아이템 이미지 서버와의 연결에 문제가 발생했을 가능성이 있습니다. spirit-of-kiro 프로젝트에서 `dev.env`의 `ITEM_IMAGES_SERVICE_URL` 환경변수 값을 아래 도메인 중 하나로 변경합니다. 도메인을 변경하면 기존과는 다른 서버에 이미지 생성을 요청할 수 있습니다.
+
+```md
+# Before (dev.env)
+
+ITEM_IMAGES_SERVICE_URL=https://d16sw0kh78rbrs.cloudfront.net
+
+
+---
+
+
+# After (dev.env)
+
+ITEM_IMAGES_SERVICE_URL=https://d130d3w5qk3a8l.cloudfront.net
+
+or
+
+ITEM_IMAGES_SERVICE_URL=https://d33xhsyqtr6rnl.cloudfront.net
+```
+
+---
+
+##### Q5. Spirit of Kiro 게임에서 아이템이 생성되지 않습니다. 
+
+A5. 아래와 같은 상태에 갇혀 있을 경우, Game 서버 컨테이너에 문제가 발생했을 가능성이 있습니다.
+
+<img src="/img/faq/bedrock/1.png" className="w300" />
+
+도커 데스크탑에 접속하여 Containers 목록을 확인합니다. server 컨테이너를 선택하고 로그를 확인합니다.
+
+![2](/img/faq/bedrock/2.png)
+
+로그에서 다음 메시지가 출력될 경우, Bedrock 모델 권한이 없음을 의미합니다.
+
+`
+AccessDeniedException: Model access is denied due to IAM user or service role is not authorized to perform the required AWS Marketplace actions (aws-marketplace:ViewSubscriptions, aws-marketplace:Subscribe) to enable access to this model. Refer to the Amazon Bedrock documentation for further details. Your AWS Marketplace subscription for this model cannot be completed at this time. If you recently fixed this issue, try again after 10 minutes.
+`
+
+AWS 콘솔 > 
+AWS Marketplace로 이동하여 [구독 관리] > [활성 구독]을 확인합니다. **`Claude Sonnet 4.5 (Amazon Bedrock Edition)`** 제품을 선택합니다.
+구독 상태가 "Active"로 변경될 때까지 대기합니다. "Active" 상태로 전환되면 Spirit of Kiro 게임으로 돌아가 아이템 생성을 재시도합니다.
+
+
+![3](/img/faq/bedrock/3.png)
+
+---

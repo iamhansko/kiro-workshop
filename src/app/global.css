@@ -224,3 +224,7 @@ img.w700 {
 img.w800 {
   width: 800px !important;
 }
+
+img.round {
+  border-radius: 22%;
+}

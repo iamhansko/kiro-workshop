@@ -1,4 +1,6 @@
-# Agent Hook
+# Agent Hooks
+
+<img src="/img/kiro_agent_hooks.png" />
 
 ### 학습 목표
 - 에이전트 훅의 개념과 활용 이해
@@ -99,7 +101,7 @@ assets 폴더에 파일이 삭제되면, assets 폴더의 index.ts 파일에서 
 
 이제 두 개의 에이전트 훅이 .kiro/hooks에 설정되었고, 좌측 사이드바 AGENT HOOKS 아래에도 표시되어야 합니다.
 
-1. client/src/assets/ 경로에 [이미지 파일](https://cataas.com/cat)을 드래그 앤 드롭해보세요. 에셋 정리 훅이 작동하여 `/client/src/assets/index.ts`를 업데이트하는 것을 확인할 수 있습니다.
+1. [이미지 파일](https://cataas.com/cat)을 바탕화면에 다운로드 받은 후, 해당 이미지를 client/src/assets/ 경로에 이동(드래그 앤 드롭)시켜 보세요. 에셋 정리 훅이 작동하여 `/client/src/assets/index.ts`를 업데이트하는 것을 확인할 수 있습니다.
 
 2. 그 다음 해당 이미지를 삭제하면, 에셋 제거 훅이 작동하여 `/client/src/assets/index.ts`에서 삭제된 에셋(이미지) 관련 코드를 삭제합니다.
 
