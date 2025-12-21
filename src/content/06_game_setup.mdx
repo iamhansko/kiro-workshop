@@ -11,11 +11,11 @@
 
 ### Docker 컨테이너로 게임 시작하기
 
-1. Docker Desktop을 실행합니다. 좌측 하단 Engine running을 확인하고 다음 단계로 넘어갑니다.
+1. Docker Desktop을 실행합니다. 좌측 하단 Engine running을 확인하고 다음 단계로 넘어갑니다. ([예시](https://www.youtube.com/watch?v=-IjYrIwRn54&t=465))
 
 ![1](/img/game_setup/1.png)
 
-2. Git Bash 등의 터미널 환경에서 다음 명령어를 수행하고, spirit-of-kiro 프로젝트를 저장합니다. 이후 kiro 명령어를 통해 프로젝트를 엽니다.
+2. Git Bash 등의 터미널 환경에서 다음 명령어를 수행하고, spirit-of-kiro 프로젝트를 저장합니다. 이후 kiro 명령어를 통해 프로젝트를 엽니다. ([예시](https://www.youtube.com/watch?v=-IjYrIwRn54&t=480))
 
 ```sh copy
 cd ~/Desktop
@@ -28,20 +28,28 @@ kiro ./
 >
 > Do you trust the authors of the files in this folder? 경고 창이 나타나면 "Yes, I trust the authors"를 선택합니다.
 
-3. Kiro에서 ***Ctrl + `*** 키를 입력하여 하단 터미널 창을 엽니다. 우측 상단 아래 화살표(v) 아이콘을 선택하고, Git Bash를 선택하여 새로운 터미널 창을 엽니다.
+3. Kiro에서 ***Ctrl + `*** 키를 입력하여 하단 터미널 창을 엽니다. 우측 상단 아래 화살표(v) 아이콘을 선택하고, Git Bash를 선택하여 새로운 터미널 창을 엽니다. ([예시](https://youtu.be/-IjYrIwRn54?si=pGbcPf0VOho5JDpX&t=500))
 
     **(⚠️ 작은 따옴표(')가 아닌 백틱(`) 사용)**
 
 ![2](/img/game_setup/2.png)
 ![3](/img/game_setup/3.png)
 
-4. Workshop Studio로 돌아가 좌측 사이드바 "Get AWS CLI Credentials"를 선택합니다. 이후 Linux or macOS (bash) 탭에서 명령어 4줄을 복사하고 Kiro 터미널에 입력합니다. 
+4. Workshop Studio로 돌아가 좌측 사이드바 "Get AWS CLI Credentials"를 선택합니다. 이후 Linux or macOS (bash) 탭에서 명령어 4줄을 복사하고 Kiro 터미널에 입력합니다. ([예시](https://www.youtube.com/watch?v=-IjYrIwRn54&t=505))
 
 ![4](/img/game_setup/4.png)
 ![5](/img/game_setup/5.png)
 ![6](/img/game_setup/6.png)
 
-5. 다음 명령어를 수행하여 spirit-of-kiro 게임을 실행합니다.
+> [!NOTE]
+>
+> Spirit of Kiro 게임은 내부적으로 Cognito라는 AWS 서비스를 활용해 회원가입/로그인(자격 증명)을 수행합니다. 로컬 환경에서 Cognito 등의 AWS 서비스와 상호작용하기 위해서는 AWS 보안 인증을 먼저 진행해야 합니다. AWS 보안 인증을 수행할 수 있는 다양한 방법이 존재하지만 본 워크샵에서는 아래와 같은 [환경 변수](https://docs.aws.amazon.com/ko_kr/cli/v1/userguide/cli-configure-envvars.html)를 사용합니다.
+> - AWS_DEFAULT_REGION : AWS 사용자가 상호작용하는 기본 리전
+> - AWS_ACCESS_KEY_ID : AWS 사용자와 연결된 액세스 키 지정
+> - AWS_SECRET_ACCESS_KEY : 액세스 키와 연결된 보안 키 지정 ("암호" 역할)
+> - AWS_SESSION_TOKEN : 임시 보안 자격 증명에 필요한 세션 토큰 값 지정
+
+5. 다음 명령어를 수행하여 spirit-of-kiro 게임을 실행합니다. ([예시](https://www.youtube.com/watch?v=-IjYrIwRn54&t=515))
 
 ```sh copy
 # Windows
